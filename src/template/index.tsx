@@ -5,7 +5,7 @@ import Nav from '~/organism/Nav'
 interface Props {
   children: ReactNode
 }
-const TemaplateHome = ({ children }: Props): JSX.Element => {
+const Temaplate = ({ children }: Props): JSX.Element => {
   return (
     <Box bgcolor="primary.main" height="100vh">
       <Nav />
@@ -14,4 +14,4 @@ const TemaplateHome = ({ children }: Props): JSX.Element => {
   )
 }
 
-export default TemaplateHome
+export default Temaplate

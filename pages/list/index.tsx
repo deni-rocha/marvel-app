@@ -2,7 +2,7 @@ import { Typography } from '@material-ui/core'
 import type { GetServerSideProps } from 'next'
 // import { GetStaticProps } from 'next'
 import type { AppProps } from 'next/app'
-import TemaplateHome from '~/template/home'
+import Temaplate from '~/template'
 import api from '~/utils/api'
 
 interface ResponseData extends AppProps {
@@ -18,12 +18,11 @@ interface ResponseData extends AppProps {
 }
 
 const List = ({ data }: ResponseData) => {
-  console.log(data)
   return (
     <div>
-      <TemaplateHome>
+      <Temaplate>
         <Typography variant="h3">Personagens</Typography>
-      </TemaplateHome>
+      </Temaplate>
     </div>
   )
 }

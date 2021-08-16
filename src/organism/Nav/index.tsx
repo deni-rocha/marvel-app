@@ -4,8 +4,8 @@ import { Link } from '~/molecules/Link'
 import HomeRoundedIcon from '@material-ui/icons/HomeRounded'
 import InfoRoundedIcon from '@material-ui/icons/InfoRounded'
 import FormatListBulletedRoundedIcon from '@material-ui/icons/FormatListBulletedRounded'
-import React from 'react'
 import { Box } from '@material-ui/core'
+import { useRouter } from 'next/router'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -13,8 +13,16 @@ const useStyles = makeStyles((theme: Theme) =>
       color: 'red',
     },
     link: {
+      opacity: '0.7',
       color: 'white',
       display: 'flex',
+      textDecoration: 'none',
+    },
+    linkActive: {
+      opacity: '1',
+      color: 'white',
+      display: 'flex',
+      textDecoration: 'none',
     },
     icon: {
       color: 'white',
@@ -25,8 +33,9 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
-export default function IconBreadcrumbs() {
+export default function Nav() {
   const classes = useStyles()
+  const url = useRouter().pathname
 
   return (
     <Box
@@ -38,15 +47,24 @@ export default function IconBreadcrumbs() {
       className={classes.root}
     >
       <Breadcrumbs aria-label="breadcrumb">
-        <Link href="/" className={classes.link}>
+        <Link
+          href="/"
+          className={url === '/' ? classes.linkActive : classes.link}
+        >
           <HomeRoundedIcon className={classes.icon} />
           Início
         </Link>
-        <Link href="/list" className={classes.link}>
+        <Link
+          href="/list"
+          className={url === '/list' ? classes.linkActive : classes.link}
+        >
           <FormatListBulletedRoundedIcon className={classes.icon} />
           Personagens
         </Link>
-        <Link href="/about" className={classes.link}>
+        <Link
+          href="/about"
+          className={url === '/about' ? classes.linkActive : classes.link}
+        >
           <InfoRoundedIcon className={classes.icon} />
           Sobre
         </Link>

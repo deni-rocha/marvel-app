@@ -1,6 +1,7 @@
-import { Box, Typography } from '@material-ui/core'
+import { Typography } from '@material-ui/core'
 import { GetServerSideProps, NextPage } from 'next'
-import Nav from '~/organism/Nav'
+import Temaplate from '~/template'
+import { useRouter } from 'next/router'
 
 interface DataProps {
   data: string
@@ -8,14 +9,9 @@ interface DataProps {
 
 const About: NextPage<DataProps> = ({ data }: DataProps) => {
   return (
-    <Box>
-      <Box>
-        <Nav />
-      </Box>
-      <Box>
-        <Typography variant="h3">{data}</Typography>
-      </Box>
-    </Box>
+    <Temaplate>
+      <Typography variant="h3">{data}</Typography>
+    </Temaplate>
   )
 }
 
