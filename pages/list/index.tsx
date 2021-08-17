@@ -1,33 +1,70 @@
-import { Typography } from '@material-ui/core'
-import type { GetServerSideProps } from 'next'
-// import { GetStaticProps } from 'next'
-import type { AppProps } from 'next/app'
-import Temaplate from '~/template'
+/* eslint-disable @next/next/no-img-element */
+import { createStyles, makeStyles, Theme } from '@material-ui/core'
 import api from '~/utils/api'
+import { GetStaticProps } from 'next'
+import React from 'react'
+import Template from '~/template'
 
-interface ResponseData extends AppProps {
-  data: {
-    id: string
-    name: string
-    description: string
-    thumbanail: {
-      path: string
-      extension: string
+import ImageList from '@material-ui/core/ImageList'
+import ImageListItem from '@material-ui/core/ImageListItem'
+import ImageListItemBar from '@material-ui/core/ImageListItemBar'
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      margin: '2rem',
+      display: 'flex',
+      flexWrap: 'wrap',
+      justifyContent: 'space-around',
+      overflow: 'hidden',
+      backgroundColor: theme.palette.primary.main,
+    },
+    imageList: {
+      width: 600,
+      height: '85vh',
+    },
+    icon: {
+      color: 'rgba(255, 255, 255, 0.54)',
+    },
+  })
+)
+
+interface ResponseData {
+  data: [
+    {
+      id: string
+      name: string
+      description: string
+      thumbnail: {
+        path: string
+        extension: string
+      }
     }
-  }
+  ]
 }
 
-const List = ({ data }: ResponseData) => {
+export default function TitlebarImageList({ data }: ResponseData): JSX.Element {
+  const classes = useStyles()
   return (
-    <div>
-      <Temaplate>
-        <Typography variant="h3">Personagens</Typography>
-      </Temaplate>
-    </div>
+    <Template>
+      <div className={classes.root}>
+        <ImageList rowHeight={300} className={classes.imageList}>
+          {data.map((item) => (
+            <ImageListItem key={item.id}>
+              <img
+                src={`${item.thumbnail.path}.${item.thumbnail.extension}`}
+                alt={item.name}
+              />
+              <ImageListItemBar title={item.name} />
+            </ImageListItem>
+          ))}
+        </ImageList>
+      </div>
+    </Template>
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async (context) => {
   const res = await api.get('/characters')
   const data = res.data.data.results
 
@@ -37,5 +74,3 @@ export const getServerSideProps: GetServerSideProps = async () => {
     },
   }
 }
-
-export default List

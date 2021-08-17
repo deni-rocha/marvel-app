@@ -1,25 +1,27 @@
-import { Typography } from '@material-ui/core'
+import { Box, Typography } from '@material-ui/core'
 import { GetServerSideProps, NextPage } from 'next'
-import Temaplate from '~/template'
-import { useRouter } from 'next/router'
+import Template from '~/template'
 
-interface DataProps {
-  data: string
-}
-
-const About: NextPage<DataProps> = ({ data }: DataProps) => {
+const About: NextPage = () => {
   return (
-    <Temaplate>
-      <Typography variant="h3">{data}</Typography>
-    </Temaplate>
+    <Template>
+      <Box
+        display="flex"
+        alignItems="center"
+        height="calc(100vh - 40px)"
+        width="inherit"
+        justifyContent="center"
+        color="white"
+      >
+        <Typography variant="h4">Pedido Pago Challenge</Typography>
+      </Box>
+    </Template>
   )
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
   return {
-    props: {
-      data: 'about page',
-    },
+    props: {},
   }
 }
 

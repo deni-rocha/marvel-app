@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
       color: 'red',
     },
     link: {
-      opacity: '0.7',
+      opacity: '0.5',
       color: 'white',
       display: 'flex',
       textDecoration: 'none',
