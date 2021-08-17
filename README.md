@@ -1,3 +1,3 @@
 # marvel-app
 
-Aplicação integrada com API da Marvel
+Aplicação integrada com a API da Marvel
