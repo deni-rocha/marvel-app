@@ -5,9 +5,12 @@ import { GetStaticProps } from 'next'
 import React from 'react'
 import Template from '~/template'
 
+import Link from 'next/link'
 import ImageList from '@material-ui/core/ImageList'
 import ImageListItem from '@material-ui/core/ImageListItem'
 import ImageListItemBar from '@material-ui/core/ImageListItemBar'
+import InfoIcon from '@material-ui/icons/Info'
+import { ResponseDataList } from 'types'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,24 +29,19 @@ const useStyles = makeStyles((theme: Theme) =>
     icon: {
       color: 'rgba(255, 255, 255, 0.54)',
     },
+    link: {
+      color: 'silver',
+      fontSize: '12px',
+      '& svg': {
+        fontSize: '30px',
+      },
+    },
   })
 )
 
-interface ResponseData {
-  data: [
-    {
-      id: string
-      name: string
-      description: string
-      thumbnail: {
-        path: string
-        extension: string
-      }
-    }
-  ]
-}
-
-export default function TitlebarImageList({ data }: ResponseData): JSX.Element {
+export default function TitlebarImageList({
+  data,
+}: ResponseDataList): JSX.Element {
   const classes = useStyles()
   return (
     <Template>
@@ -55,7 +53,22 @@ export default function TitlebarImageList({ data }: ResponseData): JSX.Element {
                 src={`${item.thumbnail.path}.${item.thumbnail.extension}`}
                 alt={item.name}
               />
-              <ImageListItemBar title={item.name} />
+              <ImageListItemBar
+                title={item.name}
+                actionIcon={
+                  <Link
+                    href={{
+                      pathname: '/info/[id]',
+                      query: { id: `${item.id}` },
+                    }}
+                    passHref
+                  >
+                    <a className={classes.link}>
+                      <InfoIcon />
+                    </a>
+                  </Link>
+                }
+              />
             </ImageListItem>
           ))}
         </ImageList>

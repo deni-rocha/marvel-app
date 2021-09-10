@@ -1,15 +1,21 @@
 import NextLink from 'next/link'
-import { AnchorHTMLAttributes, ReactNode } from 'react'
+import { ReactNode } from 'react'
 
-interface Props extends AnchorHTMLAttributes<HTMLAnchorElement> {
-  href: string
+interface Props {
+  href: {
+    pathname: string
+    query: { id: string }
+  }
   children: ReactNode
 }
 
 export const Link = ({ href, children, ...props }: Props) => {
   return (
     <NextLink href={href}>
-      <a {...props}>{children}</a>
+      <>
+        <a {...props}></a>
+        {children}
+      </>
     </NextLink>
   )
 }

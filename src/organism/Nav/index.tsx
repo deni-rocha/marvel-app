@@ -1,6 +1,6 @@
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import Breadcrumbs from '@material-ui/core/Breadcrumbs'
-import { Link } from '~/molecules/Link'
+import Link from 'next/link'
 import HomeRoundedIcon from '@material-ui/icons/HomeRounded'
 import InfoRoundedIcon from '@material-ui/icons/InfoRounded'
 import FormatListBulletedRoundedIcon from '@material-ui/icons/FormatListBulletedRounded'
@@ -47,27 +47,30 @@ export default function Nav() {
       className={classes.root}
     >
       <Breadcrumbs aria-label="breadcrumb">
-        <Link
-          href="/"
-          className={url === '/' ? classes.linkActive : classes.link}
-        >
-          <HomeRoundedIcon className={classes.icon} />
-          Início
-        </Link>
-        <Link
-          href="/list"
-          className={url === '/list' ? classes.linkActive : classes.link}
-        >
-          <FormatListBulletedRoundedIcon className={classes.icon} />
-          Personagens
-        </Link>
-        <Link
-          href="/about"
-          className={url === '/about' ? classes.linkActive : classes.link}
-        >
-          <InfoRoundedIcon className={classes.icon} />
-          Sobre
-        </Link>
+        <li className={url === '/' ? classes.linkActive : classes.link}>
+          <Link href="/">
+            <a>
+              <HomeRoundedIcon className={classes.icon} />
+              Início
+            </a>
+          </Link>
+        </li>
+        <li className={url === '/list' ? classes.linkActive : classes.link}>
+          <Link href="/list">
+            <a>
+              <FormatListBulletedRoundedIcon className={classes.icon} />
+              Personagens
+            </a>
+          </Link>
+        </li>
+        <li className={url === '/about' ? classes.linkActive : classes.link}>
+          <Link href="/about">
+            <a>
+              <InfoRoundedIcon className={classes.icon} />
+              Sobre
+            </a>
+          </Link>
+        </li>
       </Breadcrumbs>
     </Box>
   )
